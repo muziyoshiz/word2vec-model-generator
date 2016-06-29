@@ -8,11 +8,13 @@ import org.apache.spark.mllib.feature.{Word2Vec, Word2VecModel}
 object Word2VecModelGenerator {
 
   def main(args: Array[String]) {
-    require (args.length == 3, "argument: <textFilePath> <modelPath> <numPartition")
+    require (args.length == 5, "argument: <textFilePath> <modelPath> <numPartition> <minCount> <minCount> <vectorSize>")
 
     val textFilePath = args(0)
     val modelPath = args(1)
     val numPartition = args(2).toInt
+    val minCount = args(3).toInt
+    val vectorSize = args(4).toInt
 
     val startTime = System.nanoTime
 
@@ -24,6 +26,9 @@ object Word2VecModelGenerator {
 
       val word2vec = new Word2Vec()
       word2vec.setNumPartitions(numPartition)
+      word2vec.setMinCount(minCount)
+      word2vec.setVectorSize(vectorSize)
+
       val model = word2vec.fit(input)
 
       model.save(sc, modelPath)
