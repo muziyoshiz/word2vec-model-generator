@@ -8,7 +8,7 @@ import org.apache.spark.mllib.feature.{Word2Vec, Word2VecModel}
 object Word2VecModelGenerator {
 
   def main(args: Array[String]) {
-    require (args.length == 5, "argument: <textFilePath> <modelPath> <numPartition> <minCount> <minCount> <vectorSize>")
+    require (args.length == 5, "argument: <textFilePath> <modelPath> <numPartition> <minCount> <vectorSize>")
 
     val textFilePath = args(0)
     val modelPath = args(1)
